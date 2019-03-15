@@ -1,6 +1,6 @@
 from spider import Spider
 
-s = Spider('enrollTestSpider')
+s = Spider('enroll')
 print(s.enroll())
 
 

@@ -7,7 +7,9 @@ class Spider:
 
 	kafkaHost = '18.144.51.15:9092'
 	enrollTopic = 'spiderEnroll'
-	# enrollConfirmTopic = 'spiderConfirm'
+	channel = None
+
+	debugMode = True
 
 	def __init__(self,id):
 		self.id = id;
@@ -20,7 +22,7 @@ class Spider:
 		enrollMessage = self.id;
 
 		p = KafkaProducer(bootstrap_servers=[self.kafkaHost])
-		future = p.send(self.enrollTopic,enrollMessage.encode('ascii'));
+		future = p.send(self.enrollTopic,enrollMessage.encode('ascii'))
 		try:
 			record_metadata = future.get(timeout=10)
 		except KafkaError:
@@ -28,19 +30,39 @@ class Spider:
 			print('enroll() Error: send enroll message Error.')
 			return False
 
-		c = KafkaConsumer(self.id,bootstrap_servers=[self.kafkaHost])
+
+
+		self.channel = KafkaConsumer(self.id,bootstrap_servers=[self.kafkaHost])
 
 		print("Wait for enroll confirm.")
-		for message in c:
-			print(message.value.decode('utf-8'))
+		for message in self.channel:
+			if self.debugMode:
+				print('enroll():' + message.value.decode('utf-8'))
 			if message.value.decode('utf-8')==self.id:
 				return True
+
+	def processMessage(self):
+		print("Spider "+self.id+" start processMessage()")
+		for message in self.channel:
+			if self.debugMode:
+				print('processMessage(): '+message.value.decode('utf-8'))
+			if message.value.decode('utf-8')=='quit':
+				exit()
+			else:
+				self.crawl(message.value.decode('utf-8'))
+
+	def crawl(self,message):
+		if self.debugMode:
+			print('crawl(): '+message)
+
 
 	def run(self):
 		# 1. enroll()
 		# 2. wait for message
 		# 3. execute command
-		pass
+		self.enroll()
+		self.processMessage()
+		
 
 
     
