@@ -11,7 +11,8 @@
 ##### Spider Logic
 
 1. Registrate to master
-2. Wait until Kafka message come
+   1. for master - create topic for this spider
+2. Subscribe topic and wait until Kafka message come
 3. Decode Kafka message
    1. Quit command
    2. urls to crawl
