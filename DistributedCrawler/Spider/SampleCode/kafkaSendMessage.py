@@ -3,7 +3,7 @@ from kafka import KafkaProducer
 
 kafkaHost = '18.144.51.15:9092'
 enrollTopic = 'spiderEnroll'
-topic = 'test'
+topic = 'test3'
 message = 'send message test'
 
 
