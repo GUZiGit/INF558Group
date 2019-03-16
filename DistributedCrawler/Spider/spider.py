@@ -1,6 +1,6 @@
 from kafka import KafkaProducer
 from kafka import KafkaConsumer
-
+import os
 
 class Spider:
 	"""full implementation of spider"""
@@ -52,8 +52,12 @@ class Spider:
 				self.crawl(message.value.decode('utf-8'))
 
 	def crawl(self,message):
+
+		# message format: url$url$url...
+
 		if self.debugMode:
 			print('crawl(): '+message)
+		os.system('python3 runLocalSpider.py '+ message)
 
 
 	def run(self):
@@ -62,10 +66,7 @@ class Spider:
 		# 3. execute command
 		self.enroll()
 		self.processMessage()
-		
 
-
-    
 
 
 
