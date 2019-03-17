@@ -1,0 +1,14 @@
+USC:
+Course
+https://classes.usc.edu/term-20191/
+
+UCLA:
+https://www.registrar.ucla.edu/Academics/Course-Descriptions
+
+
+UC Berkely:
+Course description:
+http://guide.berkeley.edu/courses/
+Class Schedule:
+https://classes.berkeley.edu/search/class
+
