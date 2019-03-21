@@ -14,14 +14,17 @@ class LocalSpider(scrapy.Spider):
 			for url in urls:
 				print('LocalSpider.start_requests(): '+url)
 		for url in urls:
-			yield scrapy.Request(url = url, callback = self.first_usc_parse)
-	def first_usc_parse(self,response):
+			if url=="https://classes.usc.edu/term-20191/":
+				yield scrapy.Request(url = url, callback = self.Hompage_parse)
+			elif "https://classes.usc.edu/term-20191/class" in url:
+				yield scrapy.Request(url=url,callback=self.Content_parse)
+	def Hompage_parse(self,response):
 		# content = response.body
 		# content = content.decode('utf-8')
 		for courseURL in response.xpath('//ul[@id="sortable-classes"]/li'):
 			URL=courseURL.xpath('a/@href').extract_first()
-			yield scrapy.Request(url=URL,callback=self.second_usc_parse)
-	def second_usc_parse(self,response): 
+			yield scrapy.Request(url=URL,callback=self.start_requests)
+	def Content_parse(self,response): 
 		courseInfor={}
 		if response.status!=404:
 			Major=response.xpath('//h2[@class="dept-title"]/text()').extract_first()
