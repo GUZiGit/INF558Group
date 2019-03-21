@@ -24,7 +24,7 @@ class LocalSpider(scrapy.Spider):
 		for courseURL in response.xpath('//ul[@id="sortable-classes"]/li'):
 			URL=courseURL.xpath('a/@href').extract_first()
 			yield scrapy.Request(url=URL,callback=self.start_requests)
-	def Content_parse(self,response): 
+	def Content_parse(self,response): ß
 		courseInfor={}
 		if response.status!=404:
 			Major=response.xpath('//h2[@class="dept-title"]/text()').extract_first()
