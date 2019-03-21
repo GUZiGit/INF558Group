@@ -3,7 +3,7 @@ import re
 # import sys
 import os
 
-os.system('python3 runLocalSpider.py http://baidu.com')
+os.system('python3 runLocalSpider.py https://classes.usc.edu/term-20191/classes/buad/')
 # import unicode
 # byteResult = check_output(['python3','runLocalSpider.py','http://baidu.com'])
 # print(byteResult)
