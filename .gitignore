@@ -1,3 +1,4 @@
 *.pyc
 *.DS_Store
 DistributedCrawler/Spider/__pycache__
+DistributedCrawler/Spider/SampleCode/__pycache__
