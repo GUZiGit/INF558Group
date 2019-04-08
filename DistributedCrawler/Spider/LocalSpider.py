@@ -1,9 +1,14 @@
 import scrapy
 import sys
 import json
+from databackend import MongoBackend
+from databackend import RedisBackend
+
 class LocalSpider(scrapy.Spider):
 	name = 'spiderName'
 	debugMode = False
+	mongoBackend = MongoBackend()
+	redisBackend = RedisBackend()
 
 	def start_requests(self):
 		urls = sys.argv[1]
@@ -13,17 +18,34 @@ class LocalSpider(scrapy.Spider):
 		if self.debugMode:
 			for url in urls:
 				print('LocalSpider.start_requests(): '+url)
+			print(urls)
 		for url in urls:
+
+			if self.debugMode:
+				print('in Request: '+url)
+
 			if url=="https://classes.usc.edu/term-20191/":
-				yield scrapy.Request(url = url, callback = self.Hompage_parse)
+				yield scrapy.Request(url = url, callback = self.Hompage_parse, dont_filter = True)
 			elif "https://classes.usc.edu/term-20191/class" in url:
-				yield scrapy.Request(url=url,callback=self.Content_parse)
+				yield scrapy.Request(url=url,callback=self.Content_parse,dont_filter = True)
 	def Hompage_parse(self,response):
 		# content = response.body
 		# content = content.decode('utf-8')
+
+		if self.debugMode:
+			print(response.body)
+
+		urlsForPush = []
 		for courseURL in response.xpath('//ul[@id="sortable-classes"]/li'):
 			URL=courseURL.xpath('a/@href').extract_first()
-			yield scrapy.Request(url=URL,callback=self.start_requests)
+			# yield scrapy.Request(url=URL,callback=self.start_requests)
+			if debugMode:
+				print('new url: ' +URL)
+			urlsForPush.append(URL)
+
+
+		self.redisBackend.pushUrls(urlsForPush)
+
 	def Content_parse(self,response):
 		courseInfor={}
 		if response.status!=404:
@@ -50,7 +72,8 @@ class LocalSpider(scrapy.Spider):
 						'Instructor':Instructor,
 						'syllabus':syllabus
 						})
-		print(courseInfor)
+		# print(courseInfor)
+		self.mongoBackend.insertUSC(courseInfor)
 
 
 

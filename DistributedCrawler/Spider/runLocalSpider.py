@@ -7,6 +7,7 @@ from LocalSpider import LocalSpider
 def main():
 	# disable stdout logging
 	logging.getLogger('scrapy').propagate = False
+	# 
 	process = CrawlerProcess()
 	process.crawl(LocalSpider,input=sys.argv[1])
 	process.start()

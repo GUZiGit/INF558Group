@@ -68,7 +68,14 @@ class Spider:
 		self.processMessage()
 
 
+def main():
+	s = Spider('spiderTest1')
+	s.run()
 
+
+
+if __name__ == '__main__':
+	main()
 
 
 
