@@ -24,13 +24,13 @@ class LocalSpider(scrapy.Spider):
 		for courseURL in response.xpath('//ul[@id="sortable-classes"]/li'):
 			URL=courseURL.xpath('a/@href').extract_first()
 			yield scrapy.Request(url=URL,callback=self.start_requests)
-	def Content_parse(self,response): ß
+	def Content_parse(self,response): 
 		courseInfor={}
 		if response.status!=404:
 			Major=response.xpath('//h2[@class="dept-title"]/text()').extract_first()
 			if Major!= None and Major!="Not found":
-				courseInfor["Major"]=Major
-				courseInfor["class"]=[]
+				courseInfor["MajorName"]=Major
+				courseInfor["classes"]=[]
 				for course in response.xpath('//div[@class="course-table"]/div'):
 					courseAbbre=course.xpath('div/h3/a/strong/text()').extract_first()
 					courseName=course.xpath('div/h3/a/text()').extract_first()
@@ -40,7 +40,7 @@ class LocalSpider(scrapy.Spider):
 					day=course.xpath('div[2]/table/tr[2]/td[5]/text()').extract_first()
 					Instructor=course.xpath('div[2]/table/tr[2]/td[7]/a/text()').extract_first()
 					syllabus=course.xpath('div[2]/table/tr[2]/td[9]/a/@href').extract_first()
-					courseInfor["class"].append({
+					courseInfor["classes"].append({
 						'courseAbbre':courseAbbre,
 						'courseName':courseName,
 						'catalogue':catalogue,
@@ -50,6 +50,7 @@ class LocalSpider(scrapy.Spider):
 						'Instructor':Instructor,
 						'syllabus':syllabus
 						})
+				print(courseInfor)
 		print(courseInfor)
 
 
