@@ -3,3 +3,4 @@
 *.html
 DistributedCrawler/Spider/__pycache__
 DistributedCrawler/Spider/SampleCode/__pycache__
+JsonLDBuilder/.ipynb_checkpoints/
