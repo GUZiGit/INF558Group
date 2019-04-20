@@ -1,0 +1,22 @@
+{
+  "@context": {
+    "ckb": "http://www.semanticweb.org/rice/ontologies/2019/3/CourseKB",
+    "xsd": "http://www.w3.org/2001/XMLSchema"
+  },
+  "@graph": [
+    {
+      "@id": "_:blanknode",
+      "@type": "ckb:University"
+    },
+    {
+      "@id": "https://classes.usc.edu/term-20191/",
+      "@type": "ckb:USC",
+      "ckb:UniversityName": "USC"
+    },
+    {
+      "@id": "https://www.registrar.ucla.edu/Academics/Course-Descriptions",
+      "@type": "ckb:UCLA",
+      "ckb:UniversityName": "UCLA"
+    }
+  ]
+}
