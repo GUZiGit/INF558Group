@@ -1,6 +1,9 @@
 *.pyc
 *.DS_Store
 *.html
+*.zip
+JsonLDBuilder/USC/syllabus/*.doc
+JsonLDBuilder/USC/syllabus/*.pdf
 DistributedCrawler/Spider/__pycache__
 DistributedCrawler/Spider/SampleCode/__pycache__
 JsonLDBuilder/.ipynb_checkpoints/
