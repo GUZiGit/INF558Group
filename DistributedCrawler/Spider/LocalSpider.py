@@ -105,6 +105,19 @@ class LocalSpider(scrapy.Spider):
 
 
 
+
+
+
+		# 1. content, tag
+		# 2. url, pdf, ...
+		# 3. USC UCLA 
+
+		# switch:
+
+		# USC UCLA xxx
+
+
+
 		# xpath...
 		# tag
 
