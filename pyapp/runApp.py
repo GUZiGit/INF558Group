@@ -79,7 +79,7 @@ def pressSubmit():
     f.write(json.dumps(objList))
     f.close()
 #     python3 .\json_viewer.py .\test.json
-    process = subprocess.Popen(['python3', 'json_viewer.py','test.json'])
+    process = subprocess.Popen(['python', 'json_viewer.py','test.json'])
     
 #     print(searchResult['hits']['hits'])
 #     outcome.set(searchResult['hits']['hits'])
@@ -258,7 +258,7 @@ def depthSubmit():
     f.write(json.dumps(outputObj))
     f.close()
 #     python3 .\json_viewer.py .\test.json
-    process = subprocess.Popen(['python3', 'json_viewer.py','test.json'])
+    process = subprocess.Popen(['python', 'json_viewer.py','test.json'])
 
 depthBu = Button(root,text='submit',command=depthSubmit)
 depthBu.place(x=450,y=300,anchor=NW)
