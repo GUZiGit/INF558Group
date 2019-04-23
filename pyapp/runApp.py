@@ -140,10 +140,26 @@ def depthSubmit():
         print(courseObj)
         
         courseObj['sectionObjects'] = []
-        if type(courseObj['ckb:sections'])==list:
-            for tempSectionID in courseObj['ckb:sections']:
-                basicBody['query']['bool']['must'][0]['match']={'@id': tempSectionID}
-                basicBody['query']['bool']['must'][1]['match']={'@id': tempSectionID}
+
+        if 'ckb:sections' in courseObj.keys():
+            if type(courseObj['ckb:sections'])==list:
+                for tempSectionID in courseObj['ckb:sections']:
+                    basicBody['query']['bool']['must'][0]['match']={'@id': tempSectionID}
+                    basicBody['query']['bool']['must'][1]['match']={'@id': tempSectionID}
+                    print(basicBody)
+                    searchResult = es.search(index='uscfinal',size=2, body=basicBody)
+                    tempSectionObj = searchResult['hits']['hits'][0]['_source']
+                    if 'ckb:InstructorID' in tempSectionObj.keys():
+                        basicBody['query']['bool']['must'][0]['match']={'@id': tempSectionObj['ckb:InstructorID']}
+                        basicBody['query']['bool']['must'][1]['match']={'@id':tempSectionObj['ckb:InstructorID']}
+                        print(basicBody)
+                        searchResult = es.search(index='uscfinal',size=2, body=basicBody)
+                        tempSectionObj['Instructor'] = searchResult['hits']['hits'][0]['_source']
+
+                    courseObj['sectionObjects'].append(tempSectionObj)
+            else:
+                basicBody['query']['bool']['must'][0]['match']={'@id': courseObj['ckb:sections']}
+                basicBody['query']['bool']['must'][1]['match']={'@id': courseObj['ckb:sections']}
                 print(basicBody)
                 searchResult = es.search(index='uscfinal',size=2, body=basicBody)
                 tempSectionObj = searchResult['hits']['hits'][0]['_source']
@@ -155,20 +171,6 @@ def depthSubmit():
                     tempSectionObj['Instructor'] = searchResult['hits']['hits'][0]['_source']
 
                 courseObj['sectionObjects'].append(tempSectionObj)
-        else:
-            basicBody['query']['bool']['must'][0]['match']={'@id': courseObj['ckb:sections']}
-            basicBody['query']['bool']['must'][1]['match']={'@id': courseObj['ckb:sections']}
-            print(basicBody)
-            searchResult = es.search(index='uscfinal',size=2, body=basicBody)
-            tempSectionObj = searchResult['hits']['hits'][0]['_source']
-            if 'ckb:InstructorID' in tempSectionObj.keys():
-                basicBody['query']['bool']['must'][0]['match']={'@id': tempSectionObj['ckb:InstructorID']}
-                basicBody['query']['bool']['must'][1]['match']={'@id':tempSectionObj['ckb:InstructorID']}
-                print(basicBody)
-                searchResult = es.search(index='uscfinal',size=2, body=basicBody)
-                tempSectionObj['Instructor'] = searchResult['hits']['hits'][0]['_source']
-
-            courseObj['sectionObjects'].append(tempSectionObj)
         
         outputObj = courseObj
 

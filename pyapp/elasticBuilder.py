@@ -7,12 +7,12 @@ import json
 import elasticsearch
 import elasticsearch_dsl
 
-from lxml.html.soupparser import fromstring
+# from lxml.html.soupparser import fromstring
 
 # folderDir = 'USC'
 # fileList = os.listdir(folderDir)
 
-f = open('usc.jsonld')
+f = open('ucb.jsonld')
 jsonObject = json.load(f)
 f.close()
 
