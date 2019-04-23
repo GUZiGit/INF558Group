@@ -19,10 +19,8 @@ f.close()
 es = elasticsearch.Elasticsearch([{'host': 'localhost', 'port': 9200}])
 
 
-for obj in jsonObject:
-    es.index(index='usc',body=obj,doc_type='json')
-
-
-
-
+for i in range(len(jsonObject)):
+    es.index(index='uscfinal',body=jsonObject[i],doc_type='json')
+    if i%1000==0:
+        print(i)
 

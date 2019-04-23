@@ -1,0 +1,1 @@
+strict digraph tree {    Harry -> Bill;    Harry -> Jane;    Jane -> Diane;    Diane -> Mary;    Jane -> Mark;}
