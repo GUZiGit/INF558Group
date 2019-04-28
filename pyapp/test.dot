@@ -1,1 +1,12 @@
-strict digraph tree {    Harry -> Bill;    Harry -> Jane;    Jane -> Diane;    Diane -> Mary;    Jane -> Mark;}
+strict digraph tree {    
+	root -> course;    
+	course -> course1; 
+	course -> course2; 
+	course -> course3; 
+	course -> good course;
+	course3 -> sections;
+	sections -> section1;
+	sections -> section2
+
+
+}

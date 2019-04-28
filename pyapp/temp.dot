@@ -1,0 +1,16 @@
+strict digraph tree {  < Building Knowledge Graphs >-><INF 558>[label=<ckb:CourseAbbre>];
+< Building Knowledge Graphs >-><Informatics >[label=<ckb:ProgramName>];
+< Building Knowledge Graphs >-><USC>[label=<ckb:UniversityName>];
+< Building Knowledge Graphs >-><ckb:sections>;
+<ckb:sections>-><32421D>;
+<32421D>-><Tuesday>[label=<ckb:Days>];
+<32421D>-><9 TBD>[label=<ckb:OfficeHour>];
+<32421D>-><PDF>[label=<ckb:Syllabus>];
+<32421D>-><https://web-app.usc.edu/soc/syllabus/20191/32421.pdf>[label=<ckb:SyllabusLink>];
+<32421D>-><3:30-6:50pm>[label=<ckb:Time>];
+<32421D>-><048>[label=<ckb:sessionID>];
+<32421D>-><https://classes.usc.edu/term-20191/session/048/>[label=<ckb:sessionLink>];
+<32421D>-><Lecture>[label=<ckb:sessionType>];
+<32421D>-><Wensheng Wu>[label=<Instructor>];
+<Wensheng Wu>-><https://www.cs.usc.edu/directory/faculty/profile/?lname=Wu&fname=Wensheng>[label=<ckb:InstructorLink>];
+}

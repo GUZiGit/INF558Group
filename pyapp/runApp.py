@@ -3,13 +3,26 @@ import json
 import elasticsearch
 import elasticsearch_dsl
 import subprocess
-from tkinter import Tk, Label, Listbox, StringVar,Entry, Button,NW, Text
+from PIL import Image, ImageTk
+from tkinter import Tk, Label, Listbox, StringVar,Entry, Button,NW, Text, Scrollbar
+import tkinter
 
+# subprocess.run(['rm','temp.png'])
 
 es = elasticsearch.Elasticsearch([{'host': 'localhost', 'port': 9200}])
 
 root = Tk()
-root.geometry('900x600')
+
+w, h = root.maxsize()
+root.geometry("{}x{}".format(w, h)) 
+
+# sb = Scrollbar(root)
+# sb.pack(side=tkinter.RIGHT, fill=tkinter.Y)
+
+# sb2 = Scrollbar(root)
+# sb2.pack(side=tkinter.BOTTOM, fill=tkinter.X)
+
+# root.geometry('900x600')
 
 baseLabel = Label(root,text='Breath Search by')
 baseLabel.place(x=0,y=3,anchor=NW)
@@ -18,6 +31,14 @@ searchType = Listbox(root,selectmod='BROWSE')
 searchType.insert(0,'id','Program','Course','Section','Instructor')
 searchType.select_set(0)
 searchType.place(x=120,y=3,anchor=NW)
+
+imageLabel = Label(root,width=1800,height=1000)
+
+# img1 = ImageTk.PhotoImage(file='test.png')
+# imageLabel.config(image=img1)
+# imageLabel.image = img1 
+
+imageLabel.place(x=3,y=300)
 
 
 en = Entry(root)
@@ -172,6 +193,9 @@ def depthSubmit():
 
                 courseObj['sectionObjects'].append(tempSectionObj)
         
+            courseObj['ckb:sections'] = courseObj['sectionObjects']
+            del courseObj['sectionObjects']
+
         outputObj = courseObj
 
         
@@ -260,7 +284,14 @@ def depthSubmit():
     f.write(json.dumps(outputObj))
     f.close()
 #     python3 .\json_viewer.py .\test.json
+    subprocess.run(['python3','jsonToImage.py'])
     process = subprocess.Popen(['python3', 'json_viewer.py','test.json'])
+
+    img1 = ImageTk.PhotoImage(file='temp.png')
+    imageLabel.config(image=img1)
+    imageLabel.image = img1 
+
+
 
 depthBu = Button(root,text='submit',command=depthSubmit)
 depthBu.place(x=450,y=300,anchor=NW)
