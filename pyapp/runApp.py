@@ -100,7 +100,7 @@ def pressSubmit():
     f.write(json.dumps(objList))
     f.close()
 #     python3 .\json_viewer.py .\test.json
-    process = subprocess.Popen(['python', 'json_viewer.py','test.json'])
+    process = subprocess.Popen(['python3', 'json_viewer.py','test.json'])
     
 #     print(searchResult['hits']['hits'])
 #     outcome.set(searchResult['hits']['hits'])
@@ -285,7 +285,9 @@ def depthSubmit():
     f.close()
 #     python3 .\json_viewer.py .\test.json
 
-    process = subprocess.Popen(['python', 'json_viewer.py','test.json'])
+    process = subprocess.Popen(['python3', 'json_viewer.py','test.json'])
+
+    subprocess.run(['python3','JsonToImage.py'])
 
 
     img1 = ImageTk.PhotoImage(file='temp.png')
