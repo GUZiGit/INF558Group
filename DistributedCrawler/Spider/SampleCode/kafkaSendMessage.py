@@ -4,13 +4,13 @@ from kafka import KafkaProducer
 kafkaHost = '18.144.51.15:9092'
 enrollTopic = 'spiderEnroll'
 topic = 'test3'
-message = 'send message test'
+message = 'spiderName'
 
 
 p = KafkaProducer(bootstrap_servers=[kafkaHost])
 
 
-future = p.send(topic,message.encode('ascii'));
+future = p.send(enrollTopic,message.encode('ascii'));
 
 
 try:

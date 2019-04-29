@@ -1,6 +1,6 @@
 from kafka import KafkaConsumer
 
-k = KafkaConsumer('test3',bootstrap_servers=['18.144.51.15:9092'])
+k = KafkaConsumer('newUrl',bootstrap_servers=['18.144.51.15:9092'],group_id='default')
 for m in k:
 	print(m.value.decode('utf-8'))
 

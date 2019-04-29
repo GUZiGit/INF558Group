@@ -3,7 +3,7 @@ import redis
 
 class RedisBackend:
 
-	__newUrlKey = 'NewUrl'
+	__newUrlKey = 'newUrl'
 	__crawledUrlKey = 'CrawledUrl'
 
 
@@ -11,6 +11,7 @@ class RedisBackend:
 	__hostName = '54.183.40.123'
 
 	redisOperator = redis.Redis(host=__hostName,port=__port)
+	pub = redisOperator.pubsub()
 
 	def __init__(self):
 		pass
@@ -19,7 +20,8 @@ class RedisBackend:
 	def pushUrls(self,urls):
 		# urls: list of url
 		for url in urls:
-			self.redisOperator.sadd(self.__newUrlKey,url)
+			# self.redisOperator.sadd(self.__newUrlKey,url)
+			self.redisOperator.publish(self.__newUrlKey,url)
 
 	# this function only seve for master
 	def pullUrls(self):

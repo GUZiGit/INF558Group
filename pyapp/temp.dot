@@ -1,0 +1,14 @@
+strict digraph tree {  < Integrative Learning for Social Work Practice >-><SOWK 588>[label=<ckb:CourseAbbre>];
+< Integrative Learning for Social Work Practice >-><Social Work >[label=<ckb:ProgramName>];
+< Integrative Learning for Social Work Practice >-><USC>[label=<ckb:UniversityName>];
+< Integrative Learning for Social Work Practice >-><60558D>[label=<ckb:sections>];
+<60558D>-><Friday>[label=<ckb:Days>];
+<60558D>-><Friday>[label=<ckb:OfficeHour>];
+<60558D>-><PDF>[label=<ckb:Syllabus>];
+<60558D>-><https://web-app.usc.edu/soc/syllabus/20191/60558.pdf>[label=<ckb:SyllabusLink>];
+<60558D>-><11:00-12:50pm>[label=<ckb:Time>];
+<60558D>-><marisama@usc.edu>[label=<ckb:email>];
+<60558D>-><001>[label=<ckb:sessionID>];
+<60558D>-><https://classes.usc.edu/term-20191/session/001/>[label=<ckb:sessionLink>];
+<60558D>-><Lecture>[label=<ckb:sessionType>];
+}
